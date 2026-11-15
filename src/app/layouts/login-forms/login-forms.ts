@@ -10,7 +10,6 @@ import { RouterLink } from '@angular/router';
 export class LoginForms {
   @Input() title: string = '';
   @Input() descriptionPage: string = '';
-  @Input() btnText: string = '';
   @Input() subtitle: string = '';
   @Input() subDescriptionPage: string = '';
   @Input() btnNavigation = '';

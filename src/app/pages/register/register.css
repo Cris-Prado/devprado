@@ -1,5 +1,36 @@
-form{
-  display: flex;
-  flex-direction: column; 
-  gap: 20px;
+form {
+  display: grid;
+  gap: 16px;
+}
+button {
+  padding: 12px;
+  border: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  background: var(--primary-color);
+  color: white;
+}
+button:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+[role='alert'] {
+  color: #b42318;
+}
+
+.auth-divider {
+  text-align: center;
+  color: #475467;
+}
+.google-button {
+  background: #fff;
+  color: #1f2937;
+  border: 1px solid #d0d5dd;
+}
+.google-button:hover:not(:disabled) {
+  background: #f9fafb;
+}
+.google-button:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
 }

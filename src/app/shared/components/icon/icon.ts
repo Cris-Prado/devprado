@@ -1,6 +1,6 @@
-import { Component, computed, signal } from '@angular/core';
-import { LucideDynamicIcon, LucideCircleCheck, LucideCircleX } from '@lucide/angular';
-import { icons, IconName } from '../../shared/icons/icons';
+import { Component, computed } from '@angular/core';
+import { LucideDynamicIcon } from '@lucide/angular';
+import { icons, IconName } from '../../icons/icons';
 import { input } from '@angular/core';
 
 @Component({

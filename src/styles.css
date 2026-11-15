@@ -7,11 +7,14 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   scroll-behavior: smooth;
 }
 
-ul, li, a {
+ul,
+li,
+a {
   list-style: none;
   text-decoration: none;
   color: inherit;
@@ -23,8 +26,8 @@ img {
 }
 
 main {
-  font: var(--font-poppins);
-  height: 100dvh;
+  font-family: var(--font-poppins);
+  min-height: 100dvh;
   background-color: var(--main-bg-color);
   color: var(--main-text-color);
 }

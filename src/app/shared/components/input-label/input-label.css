@@ -1,14 +1,14 @@
-.content{
+.content {
   display: flex;
   flex-direction: column;
 
-  .wrapper-inp{
+  .wrapper-inp {
     display: flex;
     gap: 0.5rem;
     border-radius: 4px;
     background-color: white;
 
-    .icon{
+    .icon {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -16,9 +16,9 @@
       height: 45px;
       aspect-ratio: 1/1;
       color: white;
-      border-radius: 4px  0 0 4px;
+      border-radius: 4px 0 0 4px;
     }
-    .input{
+    .input {
       width: 100%;
       padding: 0.05rem;
       border: none;
@@ -26,11 +26,10 @@
       font-family: 'Roboto', sans-serif;
       font-size: 1rem;
       background-color: transparent;
-    
-      &:focus{
+
+      &:focus {
         outline: var(--input-focus);
       }
     }
-    
   }
 }

@@ -6,39 +6,20 @@
       aria-label="Abrir menu principal"
       aria-controls="app-sidebar"
       [attr.aria-expanded]="menuOpen"
-      (click)="toggleMenu.emit()">
+      (click)="toggleMenu.emit()"
+    >
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <path d="M4 6h16M4 12h16M4 18h16" />
       </svg>
     </button>
-
-    <form
-      class="search"
-      role="search"
-      (submit)="submitSearch($event, searchInput.value)">
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="10.5" cy="10.5" r="6.5" />
-        <path d="m16 16 4 4" />
-      </svg>
-
-      <input
-        #searchInput
-        type="search"
-        name="search"
-        placeholder="Pesquisar no workspace..."
-        aria-label="Pesquisar no workspace" />
-    </form>
   </div>
 
-  <a
-    class="profile"
-    routerLink="/settings"
-    aria-label="Abrir configurações do perfil">
+  <div class="profile">
     <span class="profile-info">
       <strong>{{ userName }}</strong>
       <small>Minha conta</small>
     </span>
 
     <span class="avatar" aria-hidden="true">{{ initials }}</span>
-  </a>
+  </div>
 </header>
