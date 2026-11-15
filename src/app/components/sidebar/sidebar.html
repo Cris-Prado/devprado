@@ -1,1 +1,84 @@
-<p>sidebar works!</p>
+@if (open) {
+<button
+  class="backdrop"
+  type="button"
+  aria-label="Fechar menu"
+  (click)="closeMenu.emit()"></button>
+}
+
+<aside
+  id="app-sidebar"
+  class="sidebar"
+  [class.is-open]="open">
+  <div class="sidebar-header">
+    <a routerLink="/dashboard" class="brand" (click)="closeMenu.emit()">
+      <span class="brand-icon" aria-hidden="true">D</span>
+
+      <span class="brand-name">
+        DevPrado
+        <small>Workspace</small>
+      </span>
+    </a>
+
+    <button
+      class="close-button"
+      type="button"
+      aria-label="Fechar menu"
+      (click)="closeMenu.emit()">
+      ×
+    </button>
+  </div>
+
+  <nav class="menu" aria-label="Menu principal">
+    <span class="menu-label">PRINCIPAL</span>
+
+    <a
+      routerLink="/dashboard"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      (click)="closeMenu.emit()">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <rect x="3" y="3" width="7" height="7" rx="1.5" />
+        <rect x="14" y="3" width="7" height="7" rx="1.5" />
+        <rect x="3" y="14" width="7" height="7" rx="1.5" />
+        <rect x="14" y="14" width="7" height="7" rx="1.5" />
+      </svg>
+
+      Dashboard
+    </a>
+
+    <a
+      routerLink="/notes"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      (click)="closeMenu.emit()">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z" />
+        <path d="M14 3v6h6M8 13h8M8 17h5" />
+      </svg>
+
+      Anotações
+    </a>
+
+    <span class="menu-label secondary-label">PREFERÊNCIAS</span>
+
+    <a
+      routerLink="/settings"
+      routerLinkActive="active"
+      ariaCurrentWhenActive="page"
+      (click)="closeMenu.emit()">
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 7h16M4 17h16" />
+        <circle cx="9" cy="7" r="3" />
+        <circle cx="15" cy="17" r="3" />
+      </svg>
+
+      Configurações
+    </a>
+  </nav>
+
+  <div class="sidebar-footer">
+    <span class="status-dot" aria-hidden="true"></span>
+    Seu espaço de trabalho
+  </div>
+</aside>

@@ -1,8 +1,16 @@
 <div class="app">
-  <app-sidebar></app-sidebar>
+  
+  <app-sidebar
+    [open]="sidebarOpen"
+    (closeMenu)="closeSidebar()"
+  />
 
   <div class="container">
-    <app-navbar></app-navbar>
+    <app-navbar
+      userName="Cristiano Prado"
+      initials="CP"
+      [menuOpen]="sidebarOpen"
+      (toggleMenu)="toggleSidebar()" />
 
     <main class="page-content">
       <router-outlet />

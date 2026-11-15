@@ -1,21 +1,31 @@
+@import url('../../../styles/variables.css');
+
 :host {
   display: block;
   min-height: 100dvh;
-}
-
-.app {
-  display: grid;
-  grid-template-columns: 250px minmax(0, 1fr);
-  min-height: 100dvh;
+  background: #f7f8fc;
+  font-family: var(--font-poppins);
 }
 
 .container {
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
+  min-height: 100dvh;
+  margin-left: 250px;
 }
 
 .page-content {
-  flex: 1;
-  padding: 24px;
+  width: 100%;
+  max-width: 1600px;
+  margin-inline: auto;
+  padding: 32px;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin-left: 0;
+  }
+
+  .page-content {
+    padding: 20px 16px;
+  }
 }
