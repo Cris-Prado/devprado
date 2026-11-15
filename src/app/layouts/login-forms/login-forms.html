@@ -1,0 +1,19 @@
+<main>
+  <section class="login-section">
+    <h1>{{ title }}</h1>
+    <p>{{ descriptionPage }}</p>
+
+    <div class="content">
+      <ng-content></ng-content>
+      <button class="btn">{{btnText}}</button>
+      <a class="navigation" [routerLink]="navigationLink">
+        {{ btnNavigation }}
+      </a>
+    </div>
+  </section>
+  <section class="auth-section">
+    <h2>{{ subtitle }}</h2>
+    <p>{{ subDescriptionPage }}</p>
+    <img src="auth-image.svg" alt="mulher autenticando">
+  </section>
+</main>

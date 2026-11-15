@@ -1,0 +1,34 @@
+<app-login-forms
+  [title]="'Registrar-se'"
+  [descriptionPage]="'Por favor, insira suas credenciais'"
+  [btnText]="'Registrar-se'"
+  [subtitle]="'Crie uma nova conta'"
+  [subDescriptionPage]="'Insira seus dados para continuar'"
+  btnNavigation="Faça seu login"
+  navigationLink="/login">
+  <form>
+    <app-input-label
+      id="name"
+      label="Nome"
+      type="text"
+      placeholder="Insira seu nome">
+      <app-icon name="user"></app-icon>
+    </app-input-label>
+
+    <app-input-label
+      id="email"
+      label="Email"
+      type="email"
+      placeholder="Insira seu email">
+      <app-icon name="mail"></app-icon>
+    </app-input-label>
+
+    <app-input-label
+      id="password"
+      label="Senha"
+      type="password"
+      placeholder="Insira sua senha">
+      <app-icon name="lock"></app-icon>
+    </app-input-label>
+  </form>
+</app-login-forms>

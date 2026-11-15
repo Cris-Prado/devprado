@@ -1,0 +1,26 @@
+<app-login-forms
+  [title]="'Entrar'"
+  [descriptionPage]="'Por favor, insira suas credenciais'"
+  [btnText]="'Entrar'"
+  [subtitle]="'Bem-vindo de volta'"
+  [subDescriptionPage]="'Insira seus dados para continuar'"
+  btnNavigation="Criar uma conta"
+  navigationLink="/register">
+  <form>
+    <app-input-label
+      id="email"
+      label="Email"
+      type="email"
+      placeholder="Insira seu email">
+      <app-icon name="user"></app-icon>
+    </app-input-label>
+
+    <app-input-label
+      id="password"
+      label="Senha"
+      type="password"
+      placeholder="Insira sua senha">
+      <app-icon name="lock"></app-icon>
+    </app-input-label>
+  </form>
+</app-login-forms>

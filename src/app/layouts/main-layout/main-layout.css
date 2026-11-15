@@ -1,0 +1,21 @@
+:host {
+  display: block;
+  min-height: 100dvh;
+}
+
+.app {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  min-height: 100dvh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.page-content {
+  flex: 1;
+  padding: 24px;
+}

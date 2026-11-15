@@ -1,0 +1,77 @@
+@import url('../../../styles/variables.css');
+
+main {
+  font-family: var(--font-poppins);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  gap: 15px;
+
+
+  .login-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    gap: 15px;
+    flex: 0.5;
+    padding: 0 20px;
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      width: 100%;
+
+      .btn, .navigation {
+        width: 100%;
+        padding: 10px;  
+        font-weight: bolder;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-family: var(--font-poppins);
+        font-size: 16px;
+        cursor: pointer;
+        text-align: center;
+        border: none;
+        border-radius: 5px;
+      }
+
+      .btn{
+        background-color: var(--primary-color);
+        color: var(--white-color);
+      }
+
+      .navigation {
+        background-color: var(--secondary-color);
+        color: var(--white-color);
+      }
+      
+    }
+
+  }
+
+  .auth-section {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    flex: 1;
+    gap: 15px;
+  }
+}
+
+@media (max-width: 726px) {
+  main {
+    
+    .login-section{
+      flex: 1;
+      padding: 0 10px;  
+    }
+
+    .auth-section {
+     display: none;
+    }
+  }
+}

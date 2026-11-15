@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none" role="img" aria-labelledby="title desc">
+  <title id="title">DevPrado — símbolo</title>
+  <desc id="desc">Fita hexagonal geométrica com gradientes roxo e lilás, envolvendo um símbolo de código. Fundo transparente, sem texto ou iniciais.</desc>
+  <defs>
+    <linearGradient id="ribbonTop" x1="90" y1="151" x2="320" y2="41" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#7930E8"/><stop offset="1" stop-color="#C6A0FF"/>
+    </linearGradient>
+    <linearGradient id="ribbonRight" x1="285" y1="74" x2="414" y2="368" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A76AF7"/><stop offset="0.52" stop-color="#7827E8"/><stop offset="1" stop-color="#5012B8"/>
+    </linearGradient>
+    <linearGradient id="ribbonBottom" x1="406" y1="365" x2="167" y2="451" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#6320CF"/><stop offset="1" stop-color="#AB77F5"/>
+    </linearGradient>
+    <linearGradient id="ribbonLeft" x1="88" y1="143" x2="176" y2="439" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5714C8"/><stop offset="0.55" stop-color="#8133E9"/><stop offset="1" stop-color="#BE91FF"/>
+    </linearGradient>
+    <linearGradient id="codeGradient" x1="161" y1="222" x2="347" y2="299" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A166F3"/><stop offset="0.5" stop-color="#7C2BE3"/><stop offset="1" stop-color="#6020CA"/>
+    </linearGradient>
+  </defs>
+  <!-- Independently editable ribbon facets; the center and background are transparent. -->
+  <g id="hexagonal-ribbon">
+    <path id="top-fold" d="M256 28 454 142 398 174 256 92 114 174 58 142Z" fill="url(#ribbonTop)"/>
+    <path id="right-fold" d="M256 28 454 142 454 370 398 338 398 174 256 92Z" fill="url(#ribbonRight)"/>
+    <path id="bottom-fold" d="M454 370 256 484 58 370 114 338 256 420 398 338Z" fill="url(#ribbonBottom)"/>
+    <path id="left-fold" d="M58 142 114 174 114 338 256 420 256 484 58 370Z" fill="url(#ribbonLeft)"/>
+    <path id="top-fold-highlight" d="M58 142 256 28 256 32 62 144Z" fill="#DDC5FF" fill-opacity="0.45"/>
+    <path id="right-fold-shadow" d="M398 174 454 142 398 181Z" fill="#3E0B91" fill-opacity="0.2"/>
+    <path id="bottom-fold-highlight" d="M256 420 398 338 454 370 398 343 256 425Z" fill="#D3B3FF" fill-opacity="0.22"/>
+  </g>
+  <!-- Code glyphs are vector paths, with no fonts or external resources. -->
+  <g id="code-symbol" fill="url(#codeGradient)">
+    <path id="left-angle" d="M197 210 213 228 180 256 213 284 197 302 146 256Z"/>
+    <path id="slash" d="M271 203 294 203 247 309 224 309Z"/>
+    <path id="right-angle" d="M315 210 366 256 315 302 299 284 332 256 299 228Z"/>
+  </g>
+</svg>
