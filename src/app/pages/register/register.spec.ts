@@ -53,4 +53,19 @@ describe('Register', () => {
     expect(component.message()).toContain('confirmação');
     expect(component.busy()).toBe(false);
   });
+  it('starts Google login without requiring email or password', async () => {
+    fixture.nativeElement.querySelector('.google-button').click();
+    await fixture.whenStable();
+    expect(TestBed.inject(AuthService).loginWithGoogle).toHaveBeenCalledTimes(1);
+    expect(TestBed.inject(AuthService).login).not.toHaveBeenCalled();
+    expect(TestBed.inject(AuthService).register).not.toHaveBeenCalled();
+  });
+  it('shows an error and re-enables Google login on failure', async () => {
+    vi.mocked(TestBed.inject(AuthService).loginWithGoogle).mockRejectedValueOnce(
+      new Error('OAuth failed'),
+    );
+    await component.loginWithGoogle();
+    expect(component.error()).toContain('Google');
+    expect(component.busy()).toBe(false);
+  });
 });

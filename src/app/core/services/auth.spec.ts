@@ -14,6 +14,7 @@ describe('AuthService', () => {
       signOut: vi.fn().mockResolvedValue({ error: null }),
       signUp: vi.fn().mockResolvedValue({ data: { session: null }, error: null }),
       verifyOtp: vi.fn(),
+      signInWithOAuth: vi.fn().mockResolvedValue({ error: null }),
     };
     TestBed.configureTestingModule({
       providers: [{ provide: SupabaseService, useValue: { client: { auth: api } } }],
@@ -44,5 +45,20 @@ describe('AuthService', () => {
     await auth.ready;
     await expect(auth.verifyEmail('test@example.com', '123')).rejects.toThrow();
     expect(api.verifyOtp).not.toHaveBeenCalled();
+  });
+  it('starts Google OAuth with a callback on the current application origin', async () => {
+    const auth = TestBed.inject(AuthService);
+    await auth.ready;
+    await auth.loginWithGoogle();
+    expect(api.signInWithOAuth).toHaveBeenCalledWith({
+      provider: 'google',
+      options: { redirectTo: `${window.location.origin}/auth/callback` },
+    });
+  });
+  it('propagates Google provider errors to the login page', async () => {
+    const auth = TestBed.inject(AuthService);
+    await auth.ready;
+    api.signInWithOAuth.mockResolvedValueOnce({ error: new Error('Provider unavailable') });
+    await expect(auth.loginWithGoogle()).rejects.toThrow('Provider unavailable');
   });
 });

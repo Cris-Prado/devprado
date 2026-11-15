@@ -46,7 +46,8 @@
       <p role="status">{{ message() }}</p>
     }
     <button type="submit" [disabled]="busy()">{{ busy() ? 'Aguarde...' : 'Registrar-se' }}</button>
-    <button type="button" [disabled]="busy()" (click)="loginWithGoogle()">
+    <div class="auth-divider" aria-hidden="true">ou</div>
+    <button class="google-button" type="button" [disabled]="busy()" (click)="loginWithGoogle()">
       Continuar com Google
     </button>
   </form>

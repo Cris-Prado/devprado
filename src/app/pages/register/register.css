@@ -17,3 +17,20 @@ button:disabled {
 [role='alert'] {
   color: #b42318;
 }
+
+.auth-divider {
+  text-align: center;
+  color: #475467;
+}
+.google-button {
+  background: #fff;
+  color: #1f2937;
+  border: 1px solid #d0d5dd;
+}
+.google-button:hover:not(:disabled) {
+  background: #f9fafb;
+}
+.google-button:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
+}
