@@ -1,4 +1,4 @@
-import { Injectable, computed, inject, signal } from '@angular/core';
+import { DestroyRef, Injectable, computed, inject, signal } from '@angular/core';
 import type { Session, User } from '@supabase/supabase-js';
 import { SupabaseService } from './supabase';
 @Injectable({ providedIn: 'root' })
@@ -10,15 +10,17 @@ export class AuthService {
   readonly user = this._user.asReadonly();
   readonly session = this._session.asReadonly();
   readonly loading = this._loading.asReadonly();
-  readonly isAuthenticated = computed(
-    () => !!this._user() && !!this._session()
-  );
+  readonly isAuthenticated = computed(() => !!this._user() && !!this._session());
   readonly ready: Promise<void>;
   constructor() {
-    this.supabase.auth.onAuthStateChange((_event, session) => {
+    const { data } = this.supabase.auth.onAuthStateChange((_event, session) => {
       this.applySession(session);
     });
+    inject(DestroyRef).onDestroy(() => data.subscription.unsubscribe());
     this.ready = this.initializeSession();
+    void this.ready.catch(() => {
+      /* Guards and auth pages handle initialization failures. */
+    });
   }
   private applySession(session: Session | null): void {
     this._session.set(session);
@@ -34,18 +36,24 @@ export class AuthService {
     }
   }
   async register(name: string, email: string, password: string): Promise<void> {
-    const { error } = await this.supabase.auth.signUp({
+    const { data, error } = await this.supabase.auth.signUp({
       email: email.trim().toLowerCase(),
       password,
-      options: { data: { full_name: name.trim() } },
+      options: {
+        data: { full_name: name.trim() },
+        emailRedirectTo: `${window.location.origin}/auth/callback`,
+      },
     });
     if (error) throw error;
+    this.applySession(data.session);
   }
   async login(email: string, password: string): Promise<void> {
-    const { error } = await this.supabase.auth.signInWithPassword({
-      email: email.trim().toLowerCase(), password,
+    const { data, error } = await this.supabase.auth.signInWithPassword({
+      email: email.trim().toLowerCase(),
+      password,
     });
     if (error) throw error;
+    this.applySession(data.session);
   }
   async verifyEmail(email: string, token: string): Promise<Session | null> {
     if (!/^\d{6}$/.test(token.trim())) {
@@ -62,7 +70,8 @@ export class AuthService {
   }
   async resendConfirmation(email: string): Promise<void> {
     const { error } = await this.supabase.auth.resend({
-      type: 'signup', email: email.trim().toLowerCase(),
+      type: 'signup',
+      email: email.trim().toLowerCase(),
     });
     if (error) throw error;
   }

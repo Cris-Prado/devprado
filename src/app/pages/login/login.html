@@ -1,26 +1,42 @@
 <app-login-forms
   [title]="'Entrar'"
   [descriptionPage]="'Por favor, insira suas credenciais'"
-  [btnText]="'Entrar'"
   [subtitle]="'Bem-vindo de volta'"
   [subDescriptionPage]="'Insira seus dados para continuar'"
   btnNavigation="Criar uma conta"
-  navigationLink="/register">
-  <form>
+  navigationLink="/register"
+>
+  <form [formGroup]="form" (ngSubmit)="submit()">
     <app-input-label
-      id="email"
+      formControlName="email"
+      autocomplete="email"
+      inputId="email"
       label="Email"
       type="email"
-      placeholder="Insira seu email">
+      placeholder="Insira seu email"
+    >
       <app-icon name="user"></app-icon>
     </app-input-label>
 
     <app-input-label
-      id="password"
+      formControlName="password"
+      autocomplete="current-password"
+      inputId="password"
       label="Senha"
       type="password"
-      placeholder="Insira sua senha">
+      placeholder="Insira sua senha"
+    >
       <app-icon name="lock"></app-icon>
     </app-input-label>
+    @if (error()) {
+      <p role="alert">{{ error() }}</p>
+    }
+    @if (message()) {
+      <p role="status">{{ message() }}</p>
+    }
+    <button type="submit" [disabled]="busy()">{{ busy() ? 'Aguarde...' : 'Entrar' }}</button>
+    <button type="button" [disabled]="busy()" (click)="loginWithGoogle()">
+      Continuar com Google
+    </button>
   </form>
 </app-login-forms>

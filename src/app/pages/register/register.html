@@ -1,34 +1,53 @@
 <app-login-forms
   [title]="'Registrar-se'"
   [descriptionPage]="'Por favor, insira suas credenciais'"
-  [btnText]="'Registrar-se'"
   [subtitle]="'Crie uma nova conta'"
   [subDescriptionPage]="'Insira seus dados para continuar'"
   btnNavigation="Faça seu login"
-  navigationLink="/login">
-  <form>
+  navigationLink="/login"
+>
+  <form [formGroup]="form" (ngSubmit)="submit()">
     <app-input-label
-      id="name"
+      formControlName="name"
+      autocomplete="name"
+      inputId="name"
       label="Nome"
       type="text"
-      placeholder="Insira seu nome">
+      placeholder="Insira seu nome"
+    >
       <app-icon name="user"></app-icon>
     </app-input-label>
 
     <app-input-label
-      id="email"
+      formControlName="email"
+      autocomplete="email"
+      inputId="email"
       label="Email"
       type="email"
-      placeholder="Insira seu email">
+      placeholder="Insira seu email"
+    >
       <app-icon name="mail"></app-icon>
     </app-input-label>
 
     <app-input-label
-      id="password"
+      formControlName="password"
+      autocomplete="new-password"
+      inputId="password"
       label="Senha"
       type="password"
-      placeholder="Insira sua senha">
+      placeholder="Insira sua senha"
+    >
       <app-icon name="lock"></app-icon>
     </app-input-label>
+    @if (error()) {
+      <p role="alert">{{ error() }}</p>
+    }
+    @if (message()) {
+      <p role="status">{{ message() }}</p>
+    }
+    <button type="submit" [disabled]="busy()">{{ busy() ? 'Aguarde...' : 'Registrar-se' }}</button>
+    <button type="button" [disabled]="busy()" (click)="loginWithGoogle()">
+      Continuar com Google
+    </button>
   </form>
 </app-login-forms>

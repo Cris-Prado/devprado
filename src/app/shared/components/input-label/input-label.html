@@ -1,0 +1,17 @@
+<div class="content">
+  <label [for]="inputId">{{ label }}</label>
+  <div class="wrapper-inp">
+    <div class="icon"><ng-content /></div>
+    <input
+      class="input"
+      [type]="type"
+      [id]="inputId"
+      [placeholder]="placeholder"
+      [autocomplete]="autocomplete"
+      [value]="value"
+      [disabled]="disabled"
+      (input)="updateValue($event)"
+      (blur)="onTouched()"
+    />
+  </div>
+</div>

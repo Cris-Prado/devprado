@@ -1,18 +1,19 @@
 <div class="app">
-  
-  <app-sidebar
-    [open]="sidebarOpen"
-    (closeMenu)="closeSidebar()"
-  />
+  <app-sidebar [open]="sidebarOpen" (closeMenu)="closeSidebar()" />
 
   <div class="container">
     <app-navbar
-      userName="Cristiano Prado"
-      initials="CP"
+      [userName]="userName()"
+      [initials]="initials()"
       [menuOpen]="sidebarOpen"
-      (toggleMenu)="toggleSidebar()" />
+      (toggleMenu)="toggleSidebar()"
+    />
 
     <main class="page-content">
+      <button type="button" (click)="logout()">Sair da conta</button>
+      @if (logoutError()) {
+        <p role="alert">{{ logoutError() }}</p>
+      }
       <router-outlet />
     </main>
   </div>

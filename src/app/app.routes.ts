@@ -1,37 +1,28 @@
 import { Routes } from '@angular/router';
-import { Login } from './pages/login/login';
-import { Register } from './pages/register/register';
-import { MainLayout } from './layouts/main-layout/main-layout';
-import { Dashboard } from './pages/dashboard/dashboard';
+import { authChildGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'login',
-    pathMatch: 'full'
-  },
-  {
-    path: 'login',
-    component: Login
-  },
+  { path: 'login', loadComponent: () => import('./pages/login/login').then((m) => m.Login) },
   {
     path: 'register',
-    component: Register
+    loadComponent: () => import('./pages/register/register').then((m) => m.Register),
+  },
+  {
+    path: 'auth/callback',
+    loadComponent: () =>
+      import('./features/auth/auth-callback/auth-callback').then((m) => m.AuthCallback),
   },
   {
     path: '',
-    component: MainLayout,
+    loadComponent: () => import('./layouts/main-layout/main-layout').then((m) => m.MainLayout),
+    canActivateChild: [authChildGuard],
     children: [
-      {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'dashboard',
-      },
+      { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
       {
         path: 'dashboard',
-        component: Dashboard
+        loadComponent: () => import('./pages/dashboard/dashboard').then((m) => m.Dashboard),
       },
-    ]
-  }
-
+    ],
+  },
+  { path: '**', redirectTo: 'dashboard' },
 ];

@@ -1,17 +1,39 @@
 import { TestBed } from '@angular/core/testing';
-import { CanActivateFn } from '@angular/router';
+import {
+  provideRouter,
+  Router,
+  RouterStateSnapshot,
+  ActivatedRouteSnapshot,
+} from '@angular/router';
+import { AuthService } from '../services/auth';
+import { authChildGuard } from './auth-guard';
 
-import { authGuard } from './auth-guard';
-
-describe('authGuard', () => {
-  const executeGuard: CanActivateFn = (...guardParameters) =>
-    TestBed.runInInjectionContext(() => authGuard(...guardParameters));
-
+describe('authChildGuard', () => {
+  let authenticated: boolean;
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    authenticated = false;
+    TestBed.configureTestingModule({
+      providers: [
+        provideRouter([]),
+        {
+          provide: AuthService,
+          useValue: { ready: Promise.resolve(), isAuthenticated: () => authenticated },
+        },
+      ],
+    });
   });
-
-  it('should be created', () => {
-    expect(executeGuard).toBeTruthy();
+  const run = () =>
+    TestBed.runInInjectionContext(() =>
+      authChildGuard({} as ActivatedRouteSnapshot, { url: '/dashboard' } as RouterStateSnapshot),
+    );
+  it('redirects anonymous users and preserves the destination', async () => {
+    const result = await run();
+    expect(TestBed.inject(Router).serializeUrl(result as import('@angular/router').UrlTree)).toBe(
+      '/login?returnUrl=%2Fdashboard',
+    );
+  });
+  it('allows authenticated users', async () => {
+    authenticated = true;
+    expect(await run()).toBe(true);
   });
 });
