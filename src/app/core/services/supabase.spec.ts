@@ -1,10 +1,16 @@
-import { SupabaseService } from './supabase';
-vi.mock('@supabase/supabase-js', () => ({ createClient: vi.fn(() => ({ auth: {} })) }));
-import { createClient } from '@supabase/supabase-js';
+import { TestBed } from '@angular/core/testing';
+import { SUPABASE_CLIENT_FACTORY, SupabaseService } from './supabase';
+import { environment } from '../../../environments/environment';
+
 describe('SupabaseService', () => {
   it('configures a persistent PKCE client with explicit callback handling', () => {
-    new SupabaseService();
-    expect(createClient).toHaveBeenCalledWith(expect.any(String), expect.any(String), {
+    const client = { auth: {} };
+    const createClient = vi.fn().mockReturnValue(client);
+    TestBed.configureTestingModule({
+      providers: [{ provide: SUPABASE_CLIENT_FACTORY, useValue: createClient }],
+    });
+    const service = TestBed.inject(SupabaseService);
+    expect(createClient).toHaveBeenCalledWith(environment.supabaseUrl, environment.supabaseKey, {
       auth: {
         persistSession: true,
         autoRefreshToken: true,
@@ -12,5 +18,6 @@ describe('SupabaseService', () => {
         detectSessionInUrl: false,
       },
     });
+    expect(service.client).toBe(client);
   });
 });

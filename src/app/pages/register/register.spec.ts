@@ -1,3 +1,4 @@
+import { AuthApiError } from '@supabase/supabase-js';
 import { provideRouter } from '@angular/router';
 import { AuthService } from '../../core/services/auth';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
@@ -66,6 +67,23 @@ describe('Register', () => {
     );
     await component.loginWithGoogle();
     expect(component.error()).toContain('Google');
+    expect(component.busy()).toBe(false);
+  });
+  it('renders the actual signup failure as a useful message', async () => {
+    vi.mocked(TestBed.inject(AuthService).register).mockRejectedValueOnce(
+      new AuthApiError('Email rate limit exceeded', 429, 'over_email_send_rate_limit'),
+    );
+    component.form.setValue({
+      name: 'Cristiano',
+      email: 'user@example.com',
+      password: 'password123',
+    });
+    await component.submit();
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('[role="alert"]').textContent).toContain(
+      'limite de envio',
+    );
+    expect(component.message()).toBe('');
     expect(component.busy()).toBe(false);
   });
 });

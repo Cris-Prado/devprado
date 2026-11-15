@@ -1,6 +1,7 @@
+import { signupErrorMessage } from '../../core/services/signup-error';
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthService } from '../../core/services/auth';
 import { LoginForms } from '../../layouts/login-forms/login-forms';
 import { InputLabel } from '../../shared/components/input-label/input-label';
@@ -15,7 +16,6 @@ import { Icon } from '../../shared/components/icon/icon';
 export class Register {
   private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
-  private readonly route = inject(ActivatedRoute);
   private readonly fb = inject(FormBuilder);
   readonly busy = signal(false);
   readonly error = signal('');
@@ -43,8 +43,8 @@ export class Register {
         this.message.set(
           'Cadastro recebido. Confira seu e-mail e use o link de confirmação antes de entrar.',
         );
-    } catch {
-      this.error.set('Não foi possível cadastrar. Confira os dados e tente novamente.');
+    } catch (error: unknown) {
+      this.error.set(signupErrorMessage(error));
     } finally {
       this.busy.set(false);
     }
